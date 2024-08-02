@@ -1,41 +1,66 @@
 package com.beecrowd.exercicios.iniciante.test;
 
 public class SomaMatrizes {
-    public static int[][] somaMatrizes(int[][] a, int[][] b) {
-        int linhas = a.length;
-        int colunas = a[0].length;
-        int[][] soma = new int[linhas][colunas];
+    public static void main(String[] args) {
+        int[][] matrizA = new int[][]{
+                {1, 4, 6},
+                {3, 4, 0},
+        };
+        int[][] matrizB = new int[][]{
+                {5, 6, 1},
+                {7, 8, 2},
+        };
 
-        for (int i = 0; i < linhas; i++) {
-            for (int j = 0; j < colunas; j++) {
-                soma[i][j] = a[i][j] + b[i][j];
-            }
+        System.out.println("Matriz A");
+        mostrarMatriz(matrizA);
+
+        System.out.println("Matriz B");
+        mostrarMatriz(matrizB);
+
+        System.out.println("Ordem das matrizes:");
+        System.out.println(calcularOrdemMatriz(matrizA));
+        System.out.println(calcularOrdemMatriz(matrizB));
+
+        try {
+            int[][] matrizResultado = somarMatrizes(matrizA, matrizB);
+            System.out.println("Resultado da soma:");
+            mostrarMatriz(matrizResultado);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
-        return soma;
     }
 
-    public static void main(String[] args) {
-        int[][] a = {
-                {1, 2, 3},
-                {4, 5, 6},
-                {7, 8, 9}
-        };
+    private static String calcularOrdemMatriz(int[][] matriz) {
+        int linha = matriz.length;
+        int coluna = matriz[0].length;
 
-        int[][] b = {
-                {9, 8, 7},
-                {6, 5, 4},
-                {3, 2, 1}
-        };
+        return (linha + "x" + coluna);
+    }
 
-        int[][] resultado = somaMatrizes(a, b);
+    private static int[][] somarMatrizes(int[][] matrizA, int[][] matrizB) {
+        int[][] matrizResultado = new int[matrizA.length][matrizA[0].length];
 
-        // Imprimir a matriz resultante
-        for (int i = 0; i < resultado.length; i++) {
-            for (int j = 0; j < resultado[i].length; j++) {
-                System.out.print(resultado[i][j] + " ");
+        if (matrizA == null || matrizB == null) {
+            throw new IllegalArgumentException("As matrizes não podem ser nulas!");
+        }
+        if (matrizA.length != matrizB.length || matrizA[0].length != matrizB[0].length) {
+            throw new IllegalArgumentException("As matrizes devem ser da mesma ordem para fazer a adição!");
+        }
+
+        for (int i = 0; i < matrizA.length; i++) {
+            for (int j = 0; j < matrizA[0].length; j++) {
+                matrizResultado[i][j] = matrizA[i][j] + matrizB[i][j];
+            }
+        }
+        return matrizResultado;
+    }
+
+    private static void mostrarMatriz(int[][] matriz) {
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[0].length; j++) {
+                System.out.print(matriz[i][j] + " ");
             }
             System.out.println();
         }
     }
 }
-
