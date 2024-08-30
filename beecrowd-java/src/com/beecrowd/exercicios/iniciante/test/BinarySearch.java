@@ -1,16 +1,25 @@
 package com.beecrowd.exercicios.iniciante.test;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class BinarySearch {
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
-        addListLength(list, 1024);
+        addListLength(list, 10_000_000);
         list.sort(Integer::compareTo);
-        System.out.println(list);
+//        System.out.println(list);
 
-        int index = binarySearch(list, 1024);
+        long inicio = System.nanoTime();
+        int index = binarySearch(list, 1043);
+        long fim = System.nanoTime();
+
+        long duracao = (fim - inicio);
+        System.out.println(duracao + "ns");
+
         System.out.println(index);
     }
 
@@ -33,7 +42,7 @@ public class BinarySearch {
                 baixo = meio + 1;
             }
         }
-        
+
         return -1;
     }
 
