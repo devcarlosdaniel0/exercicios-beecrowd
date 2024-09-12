@@ -3,5 +3,7 @@ package com.beecrowd.exercicios.iniciante.test;
 import com.beecrowd.exercicios.iniciante.domain.MyClass;
 
 public class MyClassTest {
-    MyClass myObj = new MyClass();
+    public static void main(String[] args) {
+        MyClass myObj = new MyClass();
+    }
 }
